@@ -1,0 +1,50 @@
+---
+title: "R Stock"
+author: "ZQ"
+date: "25/02/2020"
+output: html_document
+---
+
+```{r}
+install.packages("quantmod")
+install.packages("fBasics")
+```
+```{r}
+library(quantmod)
+library(zoo)
+library(xts)
+library(TTR)
+```
+
+```{r}
+getSymbols("TSLA",src = "yahoo")
+```
+
+```{r}
+head(TSLA)
+tail(TSLA)
+dim(TSLA)
+```
+```{r}
+chartSeries(TSLA,theme="black",subset = '2020::2020-02')
+```
+
+```{r}
+TSLA.Profit=diff(log(TSLA$TSLA.Adjusted))
+chartSeries(TSLA.Profit,theme="white",subset = '2020::2020-02')
+```
+
+```{r}
+install.packages("fBasics")
+library(fBasics)
+library(timeDate)
+library(timeSeries)
+```
+
+```{r}
+TSLA.Pro=na.omit(TSLA.Profit)
+de <- density(TSLA.Pro)
+de
+range(TSLA.Pro)
+```
+
